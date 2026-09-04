@@ -1,0 +1,192 @@
+/* Download the body and display fonts used throughout the page. */
+@import url("https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap");
+
+/* Define page-wide defaults and reusable color variables. */
+:root {
+  font-family: "DM Sans", ui-sans-serif, system-ui, sans-serif;
+  color: #171717;
+  background: #f3f1ea;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  --ink: #171717;
+  --paper: #f3f1ea;
+  --white: #fffef9;
+  --yellow: #ffd84d;
+  --orange: #ff7043;
+  --blue: #68a8ff;
+  --violet: #7456d8;
+  --muted: #696861;
+  --line: #d8d4c8;
+}
+
+/* Include padding and borders inside every element's declared dimensions. */
+* { box-sizing: border-box; }
+/* Animate jumps to in-page anchors for users who allow motion. */
+html { scroll-behavior: smooth; }
+/* Remove browser margin, establish minimum dimensions, and apply the paper color. */
+body { margin: 0; min-width: 320px; min-height: 100vh; background: var(--paper); }
+/* Make controls and links inherit the site's typography. */
+button, a { font: inherit; }
+/* Let links inherit their surrounding text color by default. */
+a { color: inherit; }
+/* Center the application and cap its width on very large screens. */
+/* Keep overflow visible: a non-visible overflow ancestor can become the sticky containing block. */
+.app-shell { width: min(1440px, 100%); margin: 0 auto; overflow: visible; }
+
+/* Header and primary navigation. */
+.site-header {
+  min-height: 84px;
+  padding: 0 clamp(24px, 5vw, 72px);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  /* Sticky keeps the header in normal flow, then pins it to the viewport while scrolling. */
+  position: sticky;
+  top: 0;
+  /* The header is the page's highest top-level stacking layer. */
+  z-index: 100;
+  /* Keep header descendants in their own stacking context. */
+  isolation: isolate;
+  /* The full-width pseudo-element supplies the visible background and border. */
+  background: transparent;
+}
+/* Extend only the navbar surface to the viewport edges without moving its content. */
+.site-header::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  width: 100vw;
+  transform: translateX(-50%);
+  background: var(--white);
+  border-bottom: 1px solid var(--ink);
+}
+/* Arrange the logo mark and name as one clickable brand. */
+.brand { display: inline-flex; align-items: center; gap: 13px; color: var(--ink); text-decoration: none; font-family: "Space Grotesk", sans-serif; font-size: 20px; font-weight: 700; letter-spacing: -.04em; }
+/* Draw the dark circular part of the speech-bubble logo. */
+.brand-mark { width: 44px; height: 40px; position: relative; display: grid; place-items: center; border-radius: 50%; color: var(--white); background: var(--ink); }
+/* Add the small speech-bubble tail beneath the logo circle. */
+.brand-mark::after { content: ""; width: 10px; height: 10px; position: absolute; right: 2px; bottom: -2px; background: var(--ink); clip-path: polygon(0 0,100% 0,100% 100%); }
+/* Lay out the two navigation links horizontally. */
+.main-nav { display: flex; align-items: center; gap: 30px; }
+/* Give navigation links their quiet default appearance. */
+.main-nav a { color: var(--muted); text-decoration: none; font-size: 14px; font-weight: 600; }
+/* Emphasize the active or hovered navigation destination. */
+.main-nav a:hover, .main-nav a.active { color: var(--ink); text-decoration: underline; text-underline-offset: 6px; }
+
+/* Hero introduction and learning-goals panel. */
+.hero { min-height: 650px; padding: 0; display: grid; grid-template-columns: minmax(0,1.15fr) minmax(360px,.85fr); gap: 0; align-items: stretch; background: var(--yellow); border-bottom: 1px solid var(--ink); }
+/* Add responsive breathing room around the main hero message. */
+.hero-copy { padding: clamp(74px,9vw,126px) clamp(32px,6vw,90px); align-self: center; }
+/* Style small uppercase labels that introduce larger headings. */
+.eyebrow { margin: 0 0 20px; font-size: 11px; font-weight: 700; letter-spacing: .14em; }
+/* Scale the primary title fluidly while preserving its compact display style. */
+.hero h1 { max-width: 820px; margin: 0; font-family: "Space Grotesk", sans-serif; font-size: clamp(56px,7vw,94px); line-height: .94; letter-spacing: -.065em; }
+/* Constrain and space the explanatory hero paragraph. */
+.hero-text { max-width: 680px; margin: 32px 0 0; font-size: clamp(18px,2vw,22px); line-height: 1.55; }
+/* Build the blue right-hand panel and center all lesson content. */
+.lesson-card { margin: 0; padding: 50px; position: relative; display: flex; flex-direction: column; align-items: center; justify-content: center; overflow: hidden; border: 0; border-left: 1px solid var(--ink); border-radius: 0; background: var(--blue); box-shadow: none; text-align: center; }
+/* Share the outline styling for two decorative rings. */
+.lesson-card::before, .lesson-card::after { content: ""; position: absolute; border: 1px solid var(--ink); border-radius: 50%; }
+/* Size the inner decorative ring. */
+.lesson-card::before { width: 460px; height: 460px; }
+/* Size the outer decorative ring. */
+.lesson-card::after { width: 650px; height: 650px; }
+/* Turn the persona initial into a tilted, raised avatar shape. */
+.persona-avatar { width: 116px; height: 116px; z-index: 1; display: grid; place-items: center; margin-bottom: 24px; border: 2px solid var(--ink); border-radius: 42% 58% 60% 40%; color: var(--white); background: var(--violet); box-shadow: 7px 7px 0 var(--ink); font-family: "Space Grotesk", sans-serif; font-size: 48px; font-weight: 700; transform: rotate(-6deg); }
+/* Keep actual card content above the decorative rings. */
+.lesson-label, .lesson-card h2, .lesson-card ul { z-index: 1; }
+/* Present the perspective label as a compact yellow pill. */
+.lesson-label { margin: 0; padding: 7px 10px; border: 1px solid var(--ink); border-radius: 999px; color: var(--ink); background: var(--yellow); font-size: 10px; font-weight: 700; letter-spacing: .12em; }
+/* Style the persona heading with the display font. */
+.lesson-card h2 { margin: 16px 0 20px; font-family: "Space Grotesk", sans-serif; font-size: 32px; letter-spacing: -.05em; }
+/* Place the learning goals on a readable white panel. */
+.lesson-card ul { margin: 0; padding: 18px 24px; border: 1px solid var(--ink); background: var(--white); color: var(--muted); line-height: 1.8; text-align: left; list-style-position: inside; }
+
+/* Feed heading and article grid. */
+/* Put all main content in a lower, explicit stacking context than the header. */
+main { position: relative; z-index: 0; }
+.feed-section { padding: 76px clamp(24px,5vw,72px) 94px; border: 0; }
+/* Put the feed title and article count at opposite ends of one row. */
+.section-heading { display: flex; justify-content: space-between; align-items: end; gap: 30px; margin-bottom: 34px; }
+/* Use violet to connect this eyebrow label to the recommendation theme. */
+.section-heading .eyebrow { margin-bottom: 12px; color: var(--violet); }
+/* Share large display-heading styles across the feed and about sections. */
+.section-heading h2, .about-section h2 { margin: 0; font-family: "Space Grotesk", sans-serif; font-size: clamp(40px,4.5vw,62px); line-height: 1; letter-spacing: -.055em; }
+/* Display the current article total as a bordered badge. */
+.article-count { margin: 0; padding: 8px 12px; border: 1px solid var(--ink); border-radius: 999px; background: var(--white); font-size: 12px; font-weight: 700; }
+/* Use three equal card columns on wide screens. */
+.news-grid { position: relative; z-index: 0; display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 18px; }
+/* Define the bordered white container and hover animation for each card. */
+.news-card { position: relative; z-index: 0; min-width: 0; min-height: 0; overflow: hidden; padding: 0; border: 1px solid var(--ink); border-radius: 0; background: var(--white); transition: transform 180ms ease, box-shadow 180ms ease; }
+/* Retain a dark border on the middle card in each row. */
+.news-card:nth-child(3n + 2) { border-color: var(--ink); }
+/* Lift the card up and left while adding a hard shadow on hover. */
+.news-card:hover { z-index: 1; transform: translate(-4px,-4px); box-shadow: 8px 8px 0 var(--ink); }
+/* Reserve a cropped visual area at the top of each card. */
+.card-visual { height: 190px; position: relative; overflow: hidden; border-bottom: 1px solid var(--ink); background: var(--orange); }
+/* Make a loaded article cover fill the entire visual area. */
+.article-cover { width: 100%; height: 100%; position: relative; z-index: 2; display: block; object-fit: cover; transition: transform 300ms ease; }
+/* Slightly enlarge the image when its card is hovered. */
+.news-card:hover .article-cover { transform: scale(1.035); }
+/* Position the fallback behind the cover and hide it initially. */
+.cover-fallback { position: absolute; z-index: 1; inset: 0; opacity: 0; }
+/* Reveal the fallback after React adds the visible class. */
+.cover-fallback.visible { opacity: 1; }
+/* Cycle visual background colors across each group of three cards. */
+.news-card:nth-child(3n + 2) .card-visual { background: var(--violet); }
+.news-card:nth-child(3n + 3) .card-visual { background: var(--blue); }
+/* Give both decorative fallback bubbles a shared circular outline. */
+.visual-bubble { position: absolute; border: 1px solid var(--ink); border-radius: 50%; }
+/* Draw the larger lower-right fallback bubble. */
+.visual-bubble-one { width: 160px; height: 160px; right: -25px; bottom: -60px; background: var(--yellow); }
+/* Draw the smaller lower-left fallback bubble. */
+.visual-bubble-two { width: 100px; height: 100px; left: 18px; bottom: -30px; background: var(--blue); }
+/* Alternate bubble colors to keep neighboring fallback images distinct. */
+.news-card:nth-child(3n + 2) .visual-bubble-one { background: var(--orange); }
+.news-card:nth-child(3n + 3) .visual-bubble-two { background: var(--violet); }
+/* Center a large title initial over the fallback illustration. */
+.visual-letter { position: absolute; z-index: 1; left: 50%; top: 52%; color: var(--white); font-family: "Space Grotesk", sans-serif; font-size: 88px; font-weight: 700; transform: translate(-50%,-50%); text-shadow: 2px 2px 0 var(--ink); }
+/* Stack the textual card content and keep every card body equally tall. */
+.card-body { min-height: 350px; display: flex; flex-direction: column; padding: 20px; }
+/* Share horizontal alignment between the top metadata and bottom footer rows. */
+.card-top-row, .card-footer { display: flex; align-items: center; justify-content: space-between; gap: 14px; }
+/* Keep category and section labels together without forcing the card wider. */
+.card-labels { min-width: 0; display: flex; align-items: center; gap: 7px; }
+/* Highlight the category with a small yellow tag. */
+.category-tag { padding: 5px 7px; color: var(--ink); background: var(--yellow); font-size: 9px; font-weight: 700; letter-spacing: .08em; }
+/* Truncate a section name that is too wide for its available space. */
+.section-label { min-width: 0; overflow: hidden; color: var(--muted); font-size: 10px; text-overflow: ellipsis; white-space: nowrap; }
+/* Reset the save button and align its circular symbol with its label. */
+.save-button { display: inline-flex; align-items: center; gap: 5px; flex: 0 0 auto; border: 0; padding: 4px 0; color: var(--muted); background: transparent; cursor: pointer; font-size: 11px; font-weight: 700; }
+/* Turn the save symbol into a small outlined circle. */
+.save-button span { width: 20px; height: 20px; display: grid; place-items: center; border: 1px solid currentColor; border-radius: 50%; }
+/* Use violet to communicate hover and saved states. */
+.save-button:hover, .save-button.saved { color: var(--violet); background: transparent; }
+/* Style each article title as a compact display heading. */
+.news-card h3 { margin: 24px 0 12px; font-family: "Space Grotesk", sans-serif; font-size: 22px; line-height: 1.17; letter-spacing: -.04em; }
+/* Style the article summary and limit its intended visual height. */
+.summary { margin: 0 0 24px; color: var(--muted); font-size: 13px; line-height: 1.55; -webkit-line-clamp: 4; }
+/* Push the footer down, then separate it from the summary with a line. */
+.card-footer { margin-top: auto; padding-top: 16px; border-top: 1px solid var(--line); color: var(--muted); font-size: 10px; }
+/* Make the outbound article link darker and more prominent than the date. */
+.card-footer a { color: var(--ink); font-weight: 700; text-decoration: none; }
+/* Stretch the pagination control across the entire feed. */
+.show-more-button { width: 100%; margin-top: 24px; padding: 18px 24px; border: 1px solid var(--ink); border-radius: 0; color: var(--ink); background: var(--yellow); font-weight: 700; }
+/* Invert the pagination control to violet when hovered. */
+.show-more-button:hover { color: var(--white); background: var(--violet); }
+/* Arrange the final project description in two columns on a dark background. */
+.about-section { margin: 0; padding: 72px clamp(28px,6vw,86px); display: grid; grid-template-columns: minmax(280px,1fr) minmax(280px,.7fr); gap: clamp(30px,7vw,100px); align-items: center; border-radius: 0; color: var(--white); background: var(--ink); }
+/* Highlight the about-section eyebrow against the dark background. */
+.about-section .eyebrow { color: var(--yellow); }
+/* Soften and space the long project-description paragraph. */
+.about-section > p:last-child { margin: 0; color: #c9c7bf; font-size: 17px; line-height: 1.65; }
+
+/* At tablet widths, stack the hero and reduce the feed to two columns. */
+@media (max-width: 980px) { .hero { grid-template-columns: 1fr; } .lesson-card { min-height: 500px; border-top: 1px solid var(--ink); border-left: 0; } .news-grid { grid-template-columns: repeat(2,minmax(0,1fr)); } }
+/* At phone widths, simplify navigation and stack all major layouts. */
+@media (max-width: 620px) { .site-header { padding: 16px 20px; } .main-nav a { display: none; } .hero-copy { padding: 68px 22px; } .hero h1 { font-size: clamp(48px,15vw,66px); } .lesson-card { min-height: 430px; padding: 34px 20px; } .feed-section { padding: 58px 20px 72px; } .section-heading { align-items: flex-start; flex-direction: column; } .news-grid { grid-template-columns: 1fr; } .card-visual { height: 220px; } .about-section { grid-template-columns: 1fr; padding: 58px 22px; } }
+/* Respect the operating-system preference to minimize nonessential motion. */
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } .news-card, .article-cover { transition: none; } }
