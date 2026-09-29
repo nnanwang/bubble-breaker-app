@@ -1,43 +1,36 @@
-// Each card uses local state for its saved status and image-error status.
+// Only image errors are local; App owns the persistent saved status.
 import { useState } from "react";
 
 // Convert a data value such as "artificial-intelligence" into a display label.
 function formatCategory(category) {
   // Replace hyphens with spaces, then capitalize every character.
-  return category.replaceAll("-", " ").toUpperCase();
+  return (category || 'uncategorized').replaceAll("-", " ").toUpperCase();
 }
 
 // Convert the dataset's YYYY-MM-DD string into a readable English date.
 function formatDate(date) {
+  if (!date || Number.isNaN(new Date(date).getTime())) return 'Date unavailable';
   // Intl.DateTimeFormat handles locale-aware ordering and month names.
   return new Intl.DateTimeFormat("en", {
     // Show all four digits of the year.
     year: "numeric",
+    timeZone: "UTC",
     // Use an abbreviated month such as "Jan".
     month: "short",
     // Show the calendar day as a number.
     day: "numeric",
-  // Adding midnight makes the date explicit before the Date object is created.
-  }).format(new Date(`${date}T00:00:00`));
+  // UTC keeps a date-only value from shifting to the previous day.
+  }).format(new Date(date));
 }
 
 // Destructure the article props so each value can be referenced by name below.
-function NewsCard({ title, summary, category, section, date, url, imageUrl }) {
-  // Track whether this individual card has been saved; new cards begin unsaved.
-  const [isSaved, setIsSaved] = useState(false);
-  // Track an image-loading failure so the illustrated fallback can be revealed.
+function NewsCard({ title, summary, category, section, date, url, imageUrl, isSaved, onSave, onRead }) {
+  // Saved status belongs to App so it survives navigation and refreshes.
   const [coverFailed, setCoverFailed] = useState(false);
-  // Prefer the dataset image, or ask Microlink for the article's preview image.
-  const articleCover =
-    imageUrl ||
-    // Encode the URL so special characters cannot break the Microlink query string.
-    `https://api.microlink.io/?url=${encodeURIComponent(url)}&embed=image.url`;
-
-  // Reverse this card's saved state each time its button is selected.
-  function toggleSaved() {
-    // The callback receives the most recent state and returns its opposite.
-    setIsSaved((currentValue) => !currentValue);
-  }
+  // Keep the original article-preview service for data without an image field.
+  const articleCover = imageUrl || (url
+    ? `https://api.microlink.io/?url=${encodeURIComponent(url)}&embed=image.url`
+    : '');
 
   // Render one self-contained article card.
   return (
@@ -45,11 +38,11 @@ function NewsCard({ title, summary, category, section, date, url, imageUrl }) {
       {/* This visual is decorative because the title already describes the story. */}
       <div className="card-visual" aria-hidden="true">
         {/* Stop rendering a broken image after its error event has fired. */}
-        {!coverFailed && (
+        {articleCover && !coverFailed && (
           <img
             // This class makes the image fill and crop to the visual area.
             className="article-cover"
-            // articleCover contains either a supplied image or a generated preview URL.
+            // Prefer a supplied image, otherwise request the article's preview.
             src={articleCover}
             // An empty alt avoids repeating the visible article title.
             alt=""
@@ -61,8 +54,8 @@ function NewsCard({ title, summary, category, section, date, url, imageUrl }) {
             onError={() => setCoverFailed(true)}
           />
         )}
-        {/* Add the visible class only when the cover image could not load. */}
-        <div className={`cover-fallback ${coverFailed ? "visible" : ""}`}>
+        {/* Keep the illustration behind the image during loading and on failure. */}
+        <div className="cover-fallback visible">
 
           {/* These empty spans become decorative circles through CSS. */}
           <span className="visual-bubble visual-bubble-one" />
@@ -78,7 +71,9 @@ function NewsCard({ title, summary, category, section, date, url, imageUrl }) {
             <span className="category-tag">{formatCategory(category)}</span>
             <span className="section-label">{section}</span>
           </div>
-
+          <button className={`save-button ${isSaved ? 'saved' : ''}`} aria-pressed={isSaved} onClick={onSave} aria-label={`${isSaved ? 'Unsave' : 'Save'} ${title}`}>
+            <span aria-hidden="true">{isSaved ? '✓' : '+'}</span>{isSaved ? 'Saved' : 'Save'}
+          </button>
         </div>
 
         {/* h3 fits beneath the page h1 and feed-section h2 heading hierarchy. */}
@@ -90,9 +85,9 @@ function NewsCard({ title, summary, category, section, date, url, imageUrl }) {
           {/* dateTime retains the machine-readable date while the text is formatted. */}
           <time dateTime={date}>{formatDate(date)}</time>
           {/* Open the source separately and omit referrer/opener information. */}
-          <a href={url} target="_blank" rel="noreferrer">
+          {url ? <a href={url} target="_blank" rel="noopener noreferrer" onClick={onRead} aria-label={`Read ${title} (opens in a new tab)`}>
             Read article <span aria-hidden="true">↗</span>
-          </a>
+          </a> : <span>Source unavailable</span>}
         </div>
       </div>
     </article>
