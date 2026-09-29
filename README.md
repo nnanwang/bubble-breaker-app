@@ -41,7 +41,7 @@ The global navigation contains **Home** and **About**. Once a role or the person
 
 The homepage introduces the four available perspectives. Selecting a role opens its workspace; switching roles changes the active lens without merging its reading profile with another role.
 
-![Homepage with four selectable role cards](docs/screenshots/home.png)
+<img width="2970" height="1508" alt="image" src="https://github.com/user-attachments/assets/dc192191-95c8-448c-8c6d-25b7d2368464" />
 
 ### Persona workspaces
 
@@ -49,35 +49,36 @@ All roles use the same articles, but their interests determine which stories are
 
 | AI Explorer | Startup Builder |
 | --- | --- |
-| ![AI Explorer feed and information-bubble overview](docs/screenshots/ai-explorer.png) | ![Startup Builder feed and information-bubble overview](docs/screenshots/startup-builder.png) |
+| <img  alt="image" src="https://github.com/user-attachments/assets/5dbb1586-1b3f-4e03-9c5f-23d2fe79b41f" /> | <img alt="image" src="https://github.com/user-attachments/assets/a4df429e-96bf-4e06-9576-52c744fca692" /> |
 
 | Security Specialist | Digital Creator |
 | --- | --- |
-| ![Security Specialist feed and information-bubble overview](docs/screenshots/security-specialist.png) | ![Digital Creator feed and information-bubble overview](docs/screenshots/digital-creator.png) |
+| <img  alt="image" src="https://github.com/user-attachments/assets/849301c8-fb91-4b36-b99d-cd96e6d300de" /> | <img alt="image" src="https://github.com/user-attachments/assets/a77170ca-7d57-435a-8cc7-0fd89d5f4fc4" /> |
 
 ### My Analysis: role-scoped reading profile
 
 My Analysis summarizes article opens, saves, category interest points, recent reading, and Bubble Score for the active role. Each persona's profile is kept separate from the others and from the personal context.
 
-![My Analysis showing the active role's activity and Bubble Score](docs/screenshots/my-analysis.png)
+<img width="1280" height="653" alt="analysis" src="https://github.com/user-attachments/assets/8e9d9742-a7de-44d9-b874-27a8b3698341" />
+
 
 ### Break the Bubble: go beyond role interests
 
 The role-specific break feed starts from the active persona's interests, then allocates recommendations to less-read and remaining categories. Its purpose is to make the role's ranking boundary visible and offer a concrete alternative.
 
-![Break the Bubble recommendations for an active persona](docs/screenshots/break-bubble.png)
+<img width="1280" height="653" alt="break-bubble" src="https://github.com/user-attachments/assets/7787199f-3982-4f41-a0f6-f28a6f9c0eeb" />
 
 ### My Own Feed: a separate personal context
 
 My Own Feed builds a separate reading profile from the reader's own opens and saves. It does not inherit the most recently selected persona's interest scores.
 
-![Personal feed with its own recommendation profile](docs/screenshots/personal-feed.png)
+<img width="1280" height="653" alt="my-feed" src="https://github.com/user-attachments/assets/3c5e5834-bb22-44ef-aa05-a5e135fe3b55" />
 
 ### About: purpose, method, and limitations
 
 The About page explains the central question, the four personas, the user flow, the Bubble Score, data handling, and what this simulation does not measure.
 
-![About page explaining the project and its methodology](docs/screenshots/about.png)
+<img width="1280" height="653" alt="about" src="https://github.com/user-attachments/assets/040d0b47-747f-4e6a-a47f-1cd698cd00a5" />
 
 ## How It Works
 
