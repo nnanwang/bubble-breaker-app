@@ -23,6 +23,17 @@ flowchart TD
     Home[Home: choose a role] --> Role[Enter role workspace]
     Role --> Feed[My Feed: role-ranked stories]
     Feed --> Analysis[My Analysis: this role only]
+#### Role interaction: read, save, and review
+
+This walkthrough follows a role from selection into its feed, shows article-card and save interactions, and leads into its reading score.
+
+![Role selection, feed cards, save interaction, and score walkthrough](src/assets/role-1.gif)
+
+#### Compare role perspectives
+
+Compare the role-based feeds to see how different interest profiles surface different stories from the same collection.
+
+![Comparing recommendations across roles](src/assets/role2.gif)
     Feed --> Break[Break the Bubble: move beyond role interests]
     Feed --> Compare[Compare another role]
     Feed --> Personal[Build My Own Feed]
