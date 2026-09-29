@@ -1,7 +1,7 @@
 # Bubble Breaker
 
-**An interactive media-literacy experience about personalized feeds and information bubbles.**
-
+**An interactive media-literacy experience about personalized feeds and information bubbles.** <br>
+[Bubble-breaker App Link](https://bubble-breaker-six.vercel.app/) <br><br>
 Bubble Breaker is a browser-based media-literacy experience for examining how interest-driven ranking shapes the news people encounter. Using one fixed collection of 500 articles, it compares four role-based feeds, keeps each role's reading profile independent, and provides a separate personal feed.
 
 The product combines an interactive recommendation model, context-scoped reading analysis, and a guided way to explore content beyond a selected role. Its rules are deterministic and inspectable; it requires no account or backend.
