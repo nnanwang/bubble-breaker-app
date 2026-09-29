@@ -23,17 +23,6 @@ flowchart TD
     Home[Home: choose a role] --> Role[Enter role workspace]
     Role --> Feed[My Feed: role-ranked stories]
     Feed --> Analysis[My Analysis: this role only]
-#### Role interaction: read, save, and review
-
-This walkthrough follows a role from selection into its feed, shows article-card and save interactions, and leads into its reading score.
-
-![Role selection, feed cards, save interaction, and score walkthrough](src/assets/role-1.gif)
-
-#### Compare role perspectives
-
-Compare the role-based feeds to see how different interest profiles surface different stories from the same collection.
-
-![Comparing recommendations across roles](src/assets/role2.gif)
     Feed --> Break[Break the Bubble: move beyond role interests]
     Feed --> Compare[Compare another role]
     Feed --> Personal[Build My Own Feed]
@@ -65,6 +54,18 @@ All roles use the same articles, but their interests determine which stories are
 | Security Specialist | Digital Creator |
 | --- | --- |
 | <img  alt="image" src="https://github.com/user-attachments/assets/849301c8-fb91-4b36-b99d-cd96e6d300de" /> | <img alt="image" src="https://github.com/user-attachments/assets/a77170ca-7d57-435a-8cc7-0fd89d5f4fc4" /> |
+
+#### Role interaction: select, read, save, and review
+
+This browser recording follows a role from selection into its feed, opens story cards, demonstrates saving an article, and ends at the role's score summary.
+
+![Role selection, story cards, save interaction, and Bubble Score](src/assets/role-1.gif)
+
+#### Compare role perspectives
+
+The second recording compares role feeds to show how different interest profiles surface different stories from the same collection.
+
+![Comparing recommendations between roles](src/assets/role2.gif)
 
 ### My Analysis: role-scoped reading profile
 
@@ -147,6 +148,8 @@ The production output is a static site. There is no API server, database, accoun
 │   │   ├── bd041164212061.5acb40715dc90.gif
 │   │   ├── digital-creator.gif
 │   │   ├── hero.png
+│   │   ├── role-1.gif              Role selection, reading, saving, and score walkthrough
+│   │   ├── role2.gif               Cross-role recommendation comparison
 │   │   ├── security-specialist.gif
 │   │   ├── startup-builder.gif
 │   │   ├── react.svg
